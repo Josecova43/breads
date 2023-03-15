@@ -6,6 +6,17 @@ function Index(breads) {
         <Default>
             <h2>Index Page</h2>
             <p> My favorite bread {breads[0].name}</p>
+
+            <ul>
+                {
+                    breads.map((bread, index) =>{
+                        return (<li key={index}>
+                            <a href={'/breads/${index}'}>{bread.name}</a>
+                            </li>)
+
+                    })
+                }
+            </ul>
         </Default>
     )
 }
