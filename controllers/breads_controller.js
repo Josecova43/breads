@@ -13,12 +13,21 @@ breads_router.get ('/new', (req, res) => {
 breads_router.get('/:arrayIndex', (req,res) => {
     if (Bread[req.params.arrayIndex]) {
     res.render('Show', {
-        bread: Bread[req.params.arrayIndex]
+        bread: Bread[req.params.arrayIndex],
+        index: req.params.arrayIndex,
 })
 } else {
-    res.send('this index does mot exits ----> 404')
+    res.send('this index does not exits ----> 404')
 }
 })
+
+
+// DELETE
+breads_router.delete('/:indexArray', (req, res) => {
+    Bread.splice(req.params.indexArray, 1)
+    res.status(303).redirect('/breads')
+  })
+  
 
 // index 
 breads_router.get('/', (req,res)=>{

@@ -5,9 +5,12 @@ const app = express()
 
 
 
+// DEPENDENCIES
+const methodOverride = require('method-override')
 
 
 // MIDDLEWARE
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.set('views', __dirname + '/views')
