@@ -3,6 +3,17 @@ const express= require ('express')
 const breads_router = express.Router()
 const Bread = require('../models/breads.js')
 
+// UPDATE
+breads_router.put('/:arrayIndex', (req, res) => {
+    if(req.body.hasGluten === 'on'){
+      req.body.hasGluten = true
+    } else {
+      req.body.hasGluten = false
+    }
+    Bread[req.params.arrayIndex] = req.body
+    res.redirect(`/breads/${req.params.arrayIndex}`)
+  })
+  
 
 //new
 breads_router.get ('/new', (req, res) => {
@@ -21,6 +32,14 @@ breads_router.get('/:arrayIndex', (req,res) => {
 }
 })
 
+// EDIT
+breads_router.get('/:indexArray/edit', (req, res) => {
+    res.render('edit', {
+      bread: Bread[req.params.indexArray],
+      index: req.params.indexArray
+    })
+})
+
 
 // DELETE
 breads_router.delete('/:indexArray', (req, res) => {
@@ -28,6 +47,8 @@ breads_router.delete('/:indexArray', (req, res) => {
     res.status(303).redirect('/breads')
   })
   
+  
+
 
 // index 
 breads_router.get('/', (req,res)=>{
